@@ -25,22 +25,22 @@ export default class Pay extends Component {
         window.WeixinJSBridge && WeixinJSBridge.invoke('getBrandWCPayRequest',{
             "appId" : appid,
             "timeStamp" : timeStamp,
-            "nonceStr" : nonceStr, 
+            "nonceStr" : nonceStr,
             "package" : packages,
-            "signType" : "MD5", 
-            "paySign" : paySign 
+            "signType" : "MD5",
+            "paySign" : paySign
         },(res) => {
             if(res.err_msg == "get_brand_wcpay_request:ok"){
                 //支付成功
                 this.paySuccess();
-            }else if(res.err_msg == "get_brand_wcpay_request:cancel"){  
+            }else if(res.err_msg == "get_brand_wcpay_request:cancel"){
                 //alert("用户取消支付!");
                 this.refs.alert.open("用户取消支付!")
-               
+
             }else{
                 //支付失败
                 this.refs.alert.open("支付失败")
-            }  
+            }
         })
     }
 
@@ -102,7 +102,7 @@ export default class Pay extends Component {
         //     3 : "系统故障",
         //     4 : "申请支付信息失效"
         // }
-        this.getServerData((data) =>{
+        this.getServerData((data) => {
             this.isLoad = true;
             //data.cardResult = 0;
             /*cardResult:0,代表有会员卡，
@@ -119,7 +119,7 @@ export default class Pay extends Component {
             }else{
                 this.refs.alert.open(statusCode[data.result]);
             }
-            
+
         });
     }
 
@@ -131,7 +131,7 @@ export default class Pay extends Component {
                 <div className="contain">
                     <span className="pay-card"></span>
                     <span className="ml">会员卡支付</span>
-                    
+
                     <Button className={isChecked} onTap={this.selectCardFlag.bind(this, this.VIPPAY)}></Button>
                     <span className="fr">余额：{state.surplusMoney||0}</span>
                 </div>
@@ -182,7 +182,7 @@ export default class Pay extends Component {
         if(state.cutMoney > 0){
             cutMoney = <div className="order-list"><span>满减优惠</span><span className="fr">¥{state.cutMoney}</span></div>
         }
-        
+
         let isChecked = state.cardFlag != this.VIPPAY ? "fr icon checked" : "fr icon check";
 
         return (

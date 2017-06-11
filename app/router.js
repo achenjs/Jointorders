@@ -136,6 +136,7 @@ window.statusCode = {
 	}
 	function onEnter(from){
 		let route = location.hash.split("/")[1]
+		var tableNum = location.hash.split("/")[3]
 		let pageTitle = {"number":"用餐人数","home":"点餐","confirmOrder":"菜品确认","orderform":"订单详情","orderlist":"订单列表"}
 		setDocumentTitle(pageTitle[route])
 
@@ -144,8 +145,8 @@ window.statusCode = {
 		}
 
 		//	给其他桌号加菜，需要替换scoket桌号
-		if (fromName == 'orderform' && route == 'home') {
-			var tableNum = location.hash.split("/")[3]
+		if (fromName == 'orderform' && route == 'home' && tableNum !== $.cookie('tableNum')) {
+				rews.close()
 			// socket.on("connect", function(){
 				console.log("开始连接/重连");
 				rews = new ReconnectingWebSocket('ws://abtest2.youmeishi.cn/WebSocket/DishWebSocket/'+ socket.storeCode +'/' + tableNum + '/' + socket.loginName,null, {debug: true, reconnectInterval: 3000});

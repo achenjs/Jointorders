@@ -75,8 +75,7 @@ export default class Orderform extends Component {
                       this.refs.alert.open(statusCode[data.result]);
                       this.getServerData();
                     }
-                }
-                else{
+                } else {
                     this.refs.alert.open(statusCode[data.result]);
                     this.getServerData();
                 }
